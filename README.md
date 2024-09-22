@@ -4,9 +4,19 @@
 
 Api de contas a pagar, onde é possível cadastrar, listar, editar e excluir contas a pagar.
 
+## Tecnologias
+
+- Java 21
+- Postgres 14
+- Swagger-ui
+- Spring Boot 3.3.3
+- Spring Security
+- Spring Framework
+
 ## Utilização
 
 Para utilizar a api, é necessário ter o docker e docker-compose instalados.
+
 
 Para rodar a aplicação, execute o seguinte comando:
 

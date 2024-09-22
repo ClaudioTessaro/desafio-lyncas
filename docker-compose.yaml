@@ -22,9 +22,9 @@ services:
     image: postgres:14
     container_name: postgres_db
     environment:
-      POSTGRES_DB: banking
-      POSTGRES_USER: banking
-      POSTGRES_PASSWORD: banking
+      POSTGRES_DB: gerenciador
+      POSTGRES_USER: gerenciador
+      POSTGRES_PASSWORD: gerenciador
     ports:
       - "5432:5432"
     volumes:
