@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: gerenciador
+  datasource:
+    url: jdbc:postgresql://localhost:5432/gerenciador
+    username: gerenciador
+    password: gerenciador
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+gerenciador:
+  security:
+    auth:
+      jwtSecret: ======================amFuYSBob21vbG9nYWNhbw===========================
+      jwtExpiration: 86400000
+    properties:
+      whitelist: [ "/swagger-ui/**","/v3/api-docs/**", "/swagger-ui.html/**", "/api-docs", "/api-docs/**", "/v1/organizacao/cadastrar", "/v1/autenticacao/**" ]
