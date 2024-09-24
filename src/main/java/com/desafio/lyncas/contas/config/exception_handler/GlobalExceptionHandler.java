@@ -22,13 +22,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
 @Slf4j
 @ControllerAdvice
 @RequiredArgsConstructor
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler {
 
     private final MessageUtil messageUtil;
 
@@ -77,6 +78,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ResponseError> handleNegocioException(RestTemplateException e)  {
         ResponseError err = new ResponseError(e.getMessage(), OffsetDateTime.now(), HttpStatus.BAD_REQUEST.value());
         log.error("Rest template error: {}", err);
+        return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    public ResponseEntity<ValidationResponseError> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
+        List<String> msgErroValidation = new ArrayList<>();
+        for (ObjectError x : e.getBindingResult().getAllErrors()) {
+            msgErroValidation.add(x.getDefaultMessage());
+        }
+        ValidationResponseError err = new ValidationResponseError(msgErroValidation, OffsetDateTime.now(), HttpStatus.BAD_REQUEST.value());
+        log.error("Validation error: {}", err);
         return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
     }
 }

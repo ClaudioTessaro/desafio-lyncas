@@ -25,8 +25,7 @@ public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
         try {
-            resolver.resolveException(request, response, null, authException instanceof InsufficientAuthenticationException ?
-                    new com.desafio.lyncas.contas.domain.exception.AuthenticationException(authException.getMessage()) : new UnauthorizedException(authException.getMessage()));
+            resolver.resolveException(request, response, null, new com.desafio.lyncas.contas.domain.exception.AuthenticationException("usuario.nao.autenticado"));
         } catch (Exception e) {
             throw new GeneralException(e.getMessage());
         }
